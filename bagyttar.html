@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="kk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Бағыттар | Pathway</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background: #fff;
+        overflow-x: hidden;
+      }
+
+      /* ===== NAV ===== */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 60px;
+        z-index: 100;
+      }
+
+      .nav__logo {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #fff;
+      }
+
+      .nav__logo span {
+        color: #ffcc00;
+      }
+
+      .nav__links {
+        display: flex;
+        list-style: none;
+        gap: 25px;
+      }
+
+      .nav__links a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: 500;
+        transition: 0.3s;
+      }
+
+      .nav__links a:hover {
+        color: #ffcc00;
+      }
+
+      .btn {
+        background: #ffcc00;
+        border: none;
+        padding: 10px 25px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: 0.3s;
+      }
+
+      .btn:hover {
+        background: #e6b800;
+      }
+
+      /* ===== HERO SECTION ===== */
+      .hero {
+        height: 70vh;
+        background: url("./photo/f24.jpg") center/cover no-repeat;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.4);
+      }
+
+      .hero h1 {
+        color: #fff;
+        z-index: 10;
+        font-size: 3rem;
+        text-shadow: 2px 2px 10px #000;
+      }
+
+      /* ===== DESTINATIONS ===== */
+      .destinations {
+        padding: 100px 60px;
+      }
+
+      .destinations h2 {
+        font-size: 2.5rem;
+        text-align: center;
+        margin-bottom: 50px;
+        color: #333;
+      }
+
+      .destination__grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+        gap: 40px;
+      }
+
+      .destination__card {
+        background: #fff;
+        border-radius: 20px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        transition: 0.4s ease;
+      }
+
+      .destination__card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+      }
+
+      .destination__card img {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+      }
+
+      .destination__info {
+        padding: 25px;
+      }
+
+      .destination__info h3 {
+        color: #222;
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+      }
+
+      .destination__info p {
+        color: #555;
+        margin-bottom: 15px;
+        line-height: 1.5;
+      }
+
+      .destination__info .btn {
+        background: #ffcc00;
+        color: #000;
+      }
+
+      /* ===== FOOTER ===== */
+      .footer {
+        background: #111;
+        color: #ccc;
+        padding: 40px 20px;
+        text-align: center;
+      }
+
+      .footer__icons {
+        margin-top: 15px;
+        display: flex;
+        justify-content: center;
+        gap: 25px;
+      }
+
+      .footer__icons i {
+        font-size: 1.8rem;
+        cursor: pointer;
+        color: #ffcc00;
+        transition: 0.3s;
+      }
+
+      .footer__icons i:hover {
+        color: #fff;
+        transform: scale(1.2);
+      }
+    </style>
+  </head>
+
+  <body>
+    <nav>
+      <div class="nav__logo">Pathway<span>.</span></div>
+      <ul class="nav__links">
+        <li><a href="index.html">БАСТЫ БЕТ</a></li>
+        <li><a href="bagyttar.html">БАҒЫТТАР</a></li>
+        <li><a href="bagalar.html">БАҒАЛАР</a></li>
+        <li><a href="pikirler.html">ПІКІРЛЕР</a></li>
+      </ul>
+      <button class="btn">Байланысу</button>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+      <h1>Біздің үздік бағыттар 🌍</h1>
+    </section>
+
+    <!-- ===== DESTINATIONS ===== -->
+    <section class="destinations">
+      <h2>Арманыңдағы елге жол тарт!</h2>
+      <div class="destination__grid">
+        <div class="destination__card">
+          <img src="./salom/italy_photo.jpg" alt="Италия" />
+          <div class="destination__info">
+            <h3>Италия</h3>
+            <p>
+              Тарих, сән және гастрономия елінде Венецияның каналдарын аралап,
+              Римнің сұлулығына тамсан!
+            </p>
+            <button class="btn" id="italyBtn">Көру</button>
+          </div>
+        </div>
+
+        <div class="destination__card">
+          <img src="./salom/germany_photo.jpg" alt="Германия" />
+          <div class="destination__info">
+            <h3>Германия</h3>
+            <p>
+              Орман мен заманауи қалалар үйлескен ел — Берлиннен Альпіге дейін
+              ерекше саяхат.
+            </p>
+            <button class="btn">Көру</button>
+          </div>
+        </div>
+
+        <div class="destination__card">
+          <img src="./switsalend_photo.jpg" alt="Швейцария" />
+          <div class="destination__info">
+            <h3>Швейцария</h3>
+            <p>
+              Таулар, көлдер және тыныштық — әлемнің ең бейбіт бұрышында демал!
+            </p>
+            <button class="btn">Көру</button>
+          </div>
+        </div>
+
+        <div class="destination__card">
+          <img src="./photo/china_photo.jpg" alt="Қытай" />
+          <div class="destination__info">
+            <h3>Қытай</h3>
+            <p>
+              Ұлы Қытай қорғанын аралап, ежелгі өркениет пен заманауилықты
+              сезін.
+            </p>
+            <button class="btn">Көру</button>
+          </div>
+        </div>
+
+        <!-- Түркия -->
+<div class="destination__card">
+  <img src="./photo/istanbul.jpg" alt="Түркия" />
+  <div class="destination__info">
+    <h3>Түркия</h3>
+    <p>
+      Тарих пен табиғат тоғысқан ел — мөлдір теңіздер, ежелгі қалалар мен шығыс мәдениетінің жүрегі.
+    </p>
+    <button class="btn" id="turkeyBtn">Көру</button>
+  </div>
+</div>
+
+
+
+<!-- Өзбекстан -->
+<div class="destination__card">
+  <img src="./photo/uzbekstan.jpg" alt="Өзбекстан" />
+  <div class="destination__info">
+    <h3>Өзбекстан</h3>
+    <p>
+      Самарқан мен Бұхара — Ұлы Жібек жолының інжу-маржандары, тарих пен қонақжайлықтың мекені.
+    </p>
+    <button class="btn">Көру</button>
+  </div>
+</div>
+
+<!-- Танзания -->
+<div class="destination__card">
+  <img src="./photo/tanzania.jpg" alt="Танзания" />
+  <div class="destination__info">
+    <h3>Танзания</h3>
+    <p>
+      Серенгети саванналары, Килиманджаро шыңы және Занзибар жағалауы — нағыз саяхатшылар жұмағы.
+    </p>
+    <button class="btn">Көру</button>
+  </div>
+</div>
+
+<!-- Грузия -->
+<div class="destination__card">
+  <img src="./photo/georgia.jpg" alt="Грузия" />
+  <div class="destination__info">
+    <h3>Грузия</h3>
+    <p>
+      Таулар мен шарап, жылы қонақжайлық пен бай мәдениет елі — Грузия әрбір саяхатшының жүрегін баурайды.
+    </p>
+    <button class="btn" >Көру</button>
+  </div>
+</div>
+
+<!-- Ауғанстан -->
+<div class="destination__card">
+  <img src="./photo/afganistan .jpg" alt="Ауғанстан" />
+  <div class="destination__info">
+    <h3>Ауғанстан</h3>
+    <p>
+      Тарихы терең, таулы табиғаты мен ерекше дәстүрлерге бай ел — Ауғанстан.
+    </p>
+    <button class="btn">Көру</button>
+  </div>
+</div>
+
+<!-- Қырғызстан -->
+<div class="destination__card">
+  <img src="./photo/kyrgyzstan.jpg" alt="Қырғызстан" />
+  <div class="destination__info">
+    <h3>Қырғызстан</h3>
+    <p>
+      Ыстықкөлдің мөлдір суы мен биік Алатау таулары — табиғаттың нағыз кереметі.
+    </p>
+    <button class="btn">Көру</button>
+  </div>
+</div>
+
+<!-- Үндістан -->
+<div class="destination__card">
+  <img src="./photo/india.jpg" alt="Үндістан" />
+  <div class="destination__info">
+    <h3>Үндістан</h3>
+    <p>
+      Түрлі түстер мен иістер елі — Тәж-Махал, Гималай және рухани мәдениет әлемі.
+    </p>
+    <button class="btn">Көру</button>
+  </div>
+</div>
+
+<!-- БАӘ -->
+<div class="destination__card">
+  <img src="./photo/baa.jpg" alt="Біріккен Араб Әмірліктері" />
+  <div class="destination__info">
+    <h3>БАӘ</h3>
+    <p>
+      Заманауи ғимараттар, алтын жағажайлар және шексіз шөл — шығыстың жарқыраған інжу-маржаны.
+    </p>
+    <button class="btn">Көру</button>
+  </div>
+</div>
+
+<!-- Сауд Арабиясы -->
+<div class="destination__card">
+  <img src="./photo/saudia.jpg" alt="Сауд Арабиясы" />
+  <div class="destination__info">
+    <h3>Сауд Арабиясы</h3>
+    <p>
+      Ислам мәдениетінің жүрегі, қасиетті Мекке мен Мәдина қалаларының мекені.
+    </p>
+    <button class="btn">Көру</button>
+  </div>
+</div>
+
+<!-- Корея -->
+<div class="destination__card">
+  <img src="./photo/korea.jpg" alt="Корея" />
+  <div class="destination__info">
+    <h3>Корея</h3>
+    <p>
+      Заманауи технология мен бай дәстүр үйлескен ел — Корея мәдениет пен инновацияның орталығы.
+    </p>
+    <button class="btn">Көру</button>
+  </div>
+</div>
+
+
+<!-- Мадагаскар -->
+<div class="destination__card">
+  <img src="./photo/madagaskar.jpg" alt="Мадагаскар" />
+  <div class="destination__info">
+    <h3>Мадагаскар</h3>
+    <p>
+      Бірегей табиғат, лемурлар және керемет жағажайлар — Мадагаскар табиғат сүйерлердің арманы.
+    </p>
+    <button class="btn">Көру</button>
+  </div>
+</div>
+       <div class="destination__card">
+          <img src="./photo/argentina_photo.jpg" alt="Аргентина" />
+          <div class="destination__info">
+            <h3>Аргентина</h3>
+            <p>
+              Танго, Патагония және мәңгі жаз — ерекше сезім мен мәдениет елі.
+            </p>
+            <button class="btn">Көру</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+      <p>© 2025 Pathway. Барлық құқықтар қорғалған.</p>
+      <div class="footer__icons">
+        <i class="ri-instagram-fill"></i>
+        <i class="ri-telegram-fill"></i>
+        <i class="ri-youtube-fill"></i>
+        <i class="ri-map-pin-2-fill"></i>
+      </div>
+    </footer>
+     <script src="script.js"></script>
+  </body>
+</html>
