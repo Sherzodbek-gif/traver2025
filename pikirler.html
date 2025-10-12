@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="kk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Пікірлер | Pathway</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background: #fff;
+        overflow-x: hidden;
+      }
+
+      /* ===== NAVIGATION ===== */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 60px;
+        z-index: 100;
+      }
+
+      .nav__logo {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #fff;
+      }
+
+      .nav__logo span {
+        color: #ffcc00;
+      }
+
+      .nav__links {
+        display: flex;
+        list-style: none;
+        gap: 25px;
+      }
+
+      .nav__links a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: 500;
+        transition: 0.3s;
+      }
+
+      .nav__links a:hover {
+        color: #ffcc00;
+      }
+
+      .btn {
+        background: #ffcc00;
+        border: none;
+        padding: 10px 25px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: 0.3s;
+      }
+
+      .btn:hover {
+        background: #e6b800;
+      }
+
+      /* ===== HERO SECTION ===== */
+      header {
+        height: 70vh;
+        background: linear-gradient(
+            rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0.5)
+          ),
+          url("./photo/f25.jpg") center/cover no-repeat;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        text-align: center;
+        padding: 0 20px;
+        margin-bottom: 100px;
+      }
+
+      header h1 {
+        font-size: 3rem;
+        margin-bottom: 15px;
+      }
+
+      header p {
+        font-size: 1.2rem;
+        max-width: 600px;
+        margin: auto;
+      }
+
+      /* ===== REVIEWS ===== */
+      .reviews {
+        padding: 80px 60px;
+        text-align: center;
+        background: #f8f8f8;
+      }
+
+      .reviews h2 {
+        font-size: 2.4rem;
+        color: #222;
+        margin-bottom: 60px;
+      }
+
+      .review__grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 40px;
+      }
+
+      .review__card {
+        background: #fff;
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        text-align: left;
+        transition: 0.4s ease;
+      }
+
+      .review__card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+      }
+
+      .review__header {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        margin-bottom: 20px;
+      }
+
+      .review__header img {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid #ffcc00;
+      }
+
+      .review__header h4 {
+        font-size: 1.2rem;
+        color: #333;
+      }
+
+      .review__header p {
+        color: gray;
+        font-size: 0.9rem;
+      }
+
+      .stars {
+        color: #ffcc00;
+        margin-bottom: 10px;
+      }
+
+      .review__text {
+        color: #555;
+        font-size: 1rem;
+        line-height: 1.6;
+      }
+
+      /* ===== FORM SECTION ===== */
+      .form-section {
+        padding: 100px 20px;
+        background: #fff;
+        text-align: center;
+      }
+
+      .form-section h2 {
+        font-size: 2.2rem;
+        color: #222;
+        margin-bottom: 40px;
+      }
+
+      form {
+        max-width: 600px;
+        margin: auto;
+        text-align: left;
+        background: #f8f8f8;
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      }
+
+      label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #333;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        padding: 12px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        margin-bottom: 20px;
+        font-family: inherit;
+      }
+
+      textarea {
+        resize: vertical;
+      }
+
+      form .btn {
+        width: 100%;
+        font-size: 1rem;
+      }
+
+      /* ===== FOOTER ===== */
+      .footer {
+        background: #111;
+        color: #ccc;
+        padding: 40px 20px;
+        text-align: center;
+      }
+
+      .footer__icons {
+        margin-top: 15px;
+        display: flex;
+        justify-content: center;
+        gap: 25px;
+      }
+
+      .footer__icons i {
+        font-size: 1.8rem;
+        cursor: pointer;
+        color: #ffcc00;
+        transition: 0.3s;
+      }
+
+      .footer__icons i:hover {
+        color: #fff;
+        transform: scale(1.2);
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- ===== NAVIGATION ===== -->
+    <nav>
+      <div class="nav__logo">Pathway<span>.</span></div>
+      <ul class="nav__links">
+        <li><a href="index.html">БАСТЫ БЕТ</a></li>
+        <li><a href="bagyttar.html">БАҒЫТТАР</a></li>
+        <li><a href="bagalar.html">БАҒАЛАР</a></li>
+        <li><a href="pikirler.html">ПІКІРЛЕР</a></li>
+      </ul>
+      <button class="btn">Байланысу</button>
+    </nav>
+
+    <!-- ===== HEADER ===== -->
+    <header>
+      <div>
+        <h1>Біздің қонақтардың пікірлері</h1>
+        <p>Pathway арқылы саяхаттаған мыңдаған клиенттердің әсерлерімен танысыңыз</p>
+      </div>
+    </header>
+
+    <!-- ===== REVIEWS SECTION ===== -->
+    <section class="reviews">
+      <h2>Нағыз саяхатшылардың ойлары</h2>
+      <div class="review__grid">
+        <div class="review__card">
+          <div class="review__header">
+            <img src="./photo/ayjan.jpg" alt="user" />
+            <div>
+              <h4>Айжан С.</h4>
+              <p>Алматы, Қазақстан</p>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+          <p class="review__text">
+            Pathway турымен алғаш рет Швейцарияға бардым — бәрі тамаша ұйымдастырылған!
+            Қонақүй, гид, бағдарлама — мінсіз. Ұжымға алғыс білдіремін!
+          </p>
+        </div>
+
+        <div class="review__card">
+          <div class="review__header">
+            <img src="./photo/men.jpg" alt="user" />
+            <div>
+              <h4>Нұржан Т.</h4>
+              <p>Астана, Қазақстан</p>
+            </div>
+          </div>
+          <div class="stars">★★★★☆</div>
+          <p class="review__text">
+            Италиядағы тур өте әсерлі өтті! Тек ұшу уақыты сәл кешіккені болмаса, бәрі жоғары деңгейде!
+          </p>
+        </div>
+
+        <div class="review__card">
+          <div class="review__header">
+            <img src="./photo/nurjan.jpg" alt="user" />
+            <div>
+              <h4>Сәуле М.</h4>
+              <p>Шымкент</p>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+          <p class="review__text">
+            Германия мен Францияға сапарымыз ұмытылмас болды! Әр деталь ойластырылған, бағасы да қолжетімді.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FORM SECTION ===== -->
+    <section class="form-section">
+      <h2>Өз пікіріңізді қалдырыңыз 💬</h2>
+      <form>
+        <label>Атыңыз:</label>
+        <input type="text" placeholder="Атыңызды жазыңыз" required />
+
+        <label>Электрондық пошта:</label>
+        <input type="email" placeholder="example@mail.com" required />
+
+        <label>Пікіріңіз:</label>
+        <textarea rows="5" placeholder="Пікіріңізді осында жазыңыз..." required></textarea>
+
+        <button class="btn">Жіберу</button>
+      </form>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+      <p>© 2025 Pathway. Барлық құқықтар қорғалған.</p>
+      <div class="footer__icons">
+        <i class="ri-instagram-fill"></i>
+        <i class="ri-telegram-fill"></i>
+        <i class="ri-youtube-fill"></i>
+        <i class="ri-map-pin-2-fill"></i>
+      </div>
+    </footer>
+  </body>
+</html>
