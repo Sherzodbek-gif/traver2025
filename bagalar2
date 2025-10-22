@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Бағалар | Pathway</title>
+
+  <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"
+    rel="stylesheet"
+  />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background: #fff;
+      color: #222;
+      overflow-x: hidden;
+    }
+
+    /* ===== NAVIGATION (Бағыттар бетідей) ===== */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 80px;
+      z-index: 100;
+      backdrop-filter: blur(8px);
+    }
+
+    .nav__logo {
+       display: flex;
+        align-items: center;
+        gap: 25px;
+    }
+
+    .company__name {
+      font-size: 1.8rem;
+        font-weight: 700;
+        color: #fff;
+    }
+
+    .tagline {
+      font-style: italic;
+        font-size: 1rem;
+        color: #ffcc00;
+        border-left: 2px solid #ffcc00;
+        padding-left: 12px;
+        letter-spacing: 1px;
+    }
+
+    .nav__links {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+    }
+
+    .nav__links a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    .nav__links a:hover,
+    .nav__links a.active {
+      color: #ffcc00;
+    }
+
+    .btn {
+      background: #ffcc00;
+      border: none;
+      padding: 10px 25px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #e6b800;
+    }
+
+    /* ===== HEADER ===== */
+    .parallax {
+  position: relative;
+  height: 100vh;
+  background-image: url('./photo/imagemonitor3.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; /* 🔥 Parallax effekt shu joyda ishlaydi */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  text-align: center;
+  overflow: hidden;
+}
+
+.parallax::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55); /* qoraytiruvchi qatlam */
+}
+
+.parallax .header__content {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+  animation: fadeIn 1.2s ease-out forwards;
+}
+
+.parallax h1 {
+  font-size: 3rem;
+  margin-bottom: 15px;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+.parallax p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+/* paydo bo‘lish animatsiyasi */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+    /* ===== PRICING ===== */
+    .pricing {
+      padding: 100px 60px;
+      text-align: center;
+    }
+
+    .pricing h2 {
+      font-size: 2.5rem;
+      margin-bottom: 60px;
+      color: #222;
+    }
+
+    .plans {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .plan {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+      width: 320px;
+      transition: transform 0.5s, box-shadow 0.5s;
+      overflow: hidden;
+    }
+
+    .plan:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+    }
+
+    .plan__header {
+      height: 400px;
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: flex-end;
+      padding: 15px;
+      color: #fff;
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.7);
+    }
+
+    .price {
+      font-size: 1.8rem;
+      color: #ffcc00;
+      margin: 15px 0;
+      font-weight: 700;
+    }
+
+    .plan ul {
+      list-style: none;
+      text-align: left;
+      margin: 15px 0 20px 0;
+      padding-left: 15px;
+    }
+
+    .plan ul li {
+      margin-bottom: 8px;
+    }
+
+    /* ===== CONTACT ===== */
+    .contact {
+      padding: 100px 60px;
+      background: linear-gradient(to right, #111, #333);
+      color: #fff;
+      text-align: center;
+    }
+
+    .contact h2 {
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+    }
+
+    form {
+      max-width: 600px;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    input,
+    textarea {
+      padding: 15px;
+      border: none;
+      border-radius: 10px;
+      outline: none;
+    }
+
+    textarea {
+      height: 150px;
+      resize: none;
+    }
+
+    form button {
+      background: #ffcc00;
+      color: #111;
+      padding: 15px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    form button:hover {
+      background: #e6b800;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: #111;
+      color: #ccc;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .footer__icons {
+      margin-top: 15px;
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+    }
+
+    .footer__icons i {
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: #ffcc00;
+      transition: 0.3s;
+    }
+
+    .footer__icons i:hover {
+      color: #fff;
+      transform: scale(1.2);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px 25px;
+      }
+
+      .nav__links {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      header h1 {
+        font-size: 2rem;
+        padding: 0 20px;
+      }
+
+      .pricing {
+        padding: 80px 30px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ===== NAVIGATION (Бағыттар бетідей) ===== -->
+  <nav>
+      <div class="nav__logo">
+        <div class="company__name">Pathway</div>
+        <div class="tagline">Туризм агенттігі</div>
+      </div>
+      <ul class="nav__links">
+        <li><a href="index.html">БАСТЫ БЕТ</a></li>
+        <li><a href="bagyttar.html">БАҒЫТТАР</a></li>
+        <li><a href="bagalar.html" class="active">БАҒАЛАР</a></li>
+        <li><a href="pikirler.html">ПІКІРЛЕР</a></li>
+        <li><a href="brondau.html">БРОНДАУ</a></li>
+      </ul>
+    </nav>
+
+  <!-- HEADER -->
+  <header class="parallax">
+  <div class="header__content">
+    <h1>Сіздің саяхатыңыздың бағасы – сапа мен әсердің көрінісі</h1>
+    <p>Pathway ұсынған стандарт пакеттермен арманыңыздағы сапарды таңдаңыз.</p>
+  </div>
+</header>
+
+  <!-- PRICING -->
+  <section class="pricing">
+    <h2>Біздің стандарт тур пакеттер</h2>
+    <!-- 👇 Quyidagi kodlar o‘zgarmagan -->
+    <div class="plans">
+        
+      <!-- 1 -->
+      <div class="plan"><div class="plan__header" style="background-image:url('./salom/italy_photo.jpg');"><h3>Италия</h3></div><p class="price">150 000 ₸</p><ul><li>4 күн, 3 түн</li><li>Қонақүй (3 жұлдыз)</li><li>Таңғы ас кіреді</li><li>Рим және Венеция туры</li></ul><button class="btn">Брондау</button></div>
+
+      <!-- 2 -->
+      <div class="plan"><div class="plan__header" style="background-image:url('./photo/canada_2.jpg');"><h3>Канада</h3></div><p class="price">200 000 ₸</p><ul><li>5 күн, 4 түн</li><li>Қонақүй (3 жұлдыз)</li><li>Таңғы ас кіреді</li><li>Торонто және Монреаль туры</li></ul><button class="btn">Брондау</button></div>
+
+      <!-- 3 -->
+      <div class="plan"><div class="plan__header" style="background-image:url('./photo/tokio.jpg');"><h3>Жапония</h3></div><p class="price">220 000 ₸</p><ul><li>5 күн, 4 түн</li><li>Қонақүй (3 жұлдыз)</li><li>Таңғы ас кіреді</li><li>Токио, Киото туры</li></ul><button class="btn">Брондау</button></div>
+
+      <!-- 4 -->
+      <div class="plan"><div class="plan__header" style="background-image:url('./salom/germany_photo.jpg');"><h3>Германия</h3></div><p class="price">180 000 ₸</p><ul><li>4 күн, 3 түн</li><li>Қонақүй (3 жұлдыз)</li><li>Таңғы ас кіреді</li><li>Берлин туры</li></ul><button class="btn">Брондау</button></div>
+
+      <!-- 5 -->
+      <div class="plan"><div class="plan__header" style="background-image:url('./photo/argentina_photo.jpg');"><h3>Аргентина</h3></div><p class="price">200 000 ₸</p><ul><li>5 күн, 4 түн</li><li>Қонақүй (3 жұлдыз)</li><li>Таңғы ас кіреді</li><li>Буэнос-Айрес туры</li></ul><button class="btn">Брондау</button></div>
+
+      <!-- 6 -->
+      <div class="plan"><div class="plan__header" style="background-image:url('./photo/paris.jpg');"><h3>Франция</h3></div><p class="price">170 000 ₸</p><ul><li>4 күн, 3 түн</li><li>Қонақүй (3 жұлдыз)</li><li>Таңғы ас кіреді</li><li>Париж туры</li></ul><button class="btn">Брондау</button></div>
+
+      <!-- 7 -->
+      <div class="plan"><div class="plan__header" style="background-image:url('./photo/china_photo.jpg');"><h3>Қытай</h3></div><p class="price">190 000 ₸</p><ul><li>5 күн, 4 түн</li><li>Қонақүй (3 жұлдыз)</li><li>Таңғы ас кіреді</li><li>Бейжің туры</li></ul><button class="btn">Брондау</button></div>
+
+      <!-- 8 -->
+      <div class="plan"><div class="plan__header" style="background-image:url('./photo/spain.jpg');"><h3>Испания</h3></div><p class="price">160 000 ₸</p><ul><li>4 күн, 3 түн</li><li>Қонақүй (3 жұлдыз)</li><li>Таңғы ас кіреді</li><li>Барселона туры</li></ul><button class="btn">Брондау</button></div>
+
+      <!-- 9 -->
+      <div class="plan"><div class="plan__header" style="background-image:url('./photo/egupt.jpg');"><h3>Мысыр</h3></div><p class="price">140 000 ₸</p><ul><li>4 күн, 3 түн</li><li>Қонақүй (3 жұлдыз)</li><li>Таңғы ас кіреді</li><li>Каир туры</li></ul><button class="btn">Брондау</button></div>
+
+      <!-- 10 -->
+      <div class="plan"><div class="plan__header" style="background-image:url('./photo/istanbul.jpg');"><h3>Түркия</h3></div><p class="price">150 000 ₸</p><ul><li>4 күн, 3 түн</li><li>Қонақүй (3 жұлдыз)</li><li>Таңғы ас кіреді</li><li>Стамбул туры</li></ul><button class="btn">Брондау</button></div>
+
+      <!-- 11 -->
+      <div class="plan"><div class="plan__header" style="background-image:url('./photo/mexico.jpg');"><h3>Мексика</h3></div><p class="price">160 000 ₸</p><ul><li>4 күн, 3 түн</li><li>Қонақүй (3 жұлдыз)</li><li>Таңғы ас кіреді</li><li>Мексико Сити туры</li></ul><button class="btn">Брондау</button></div>
+
+      <!-- 12 -->
+      <div class="plan"><div class="plan__header" style="background-image:url('./photo/grek.jpg');"><h3>Греция</h3></div><p class="price">165 000 ₸</p><ul><li>4 күн, 3 түн</li><li>Қонақүй (3 жұлдыз)</li><li>Таңғы ас кіреді</li><li>Афины туры</li></ul><button class="btn">Брондау</button></div>
+
+      <!-- 13 -->
+      <div class="plan"><div class="plan__header" style="background-image:url('./photo/rio.jpg');"><h3>Бразилия</h3></div><p class="price">180 000 ₸</p><ul><li>5 күн, 4 түн</li><li>Қонақүй (3 жұлдыз)</li><li>Таңғы ас кіреді</li><li>Рио-де-Жанейро туры</li></ul><button class="btn">Брондау</button></div>
+
+      <!-- 14 -->
+      <div class="plan"><div class="plan__header" style="background-image:url('./photo/seoul.jpg');"><h3>Оңтүстік Корея</h3></div><p class="price">200 000 ₸</p><ul><li>5 күн, 4 түн</li><li>Қонақүй (3 жұлдыз)</li><li>Таңғы ас кіреді</li><li>Сеул туры</li></ul><button class="btn">Брондау</button></div>
+
+      <!-- 15 -->
+      <div class="plan"><div class="plan__header" style="background-image:url('./photo/russia.jpg');"><h3>Ресей</h3></div><p class="price">170 000 ₸</p><ul><li>4 күн, 3 түн</li><li>Қонақүй (3 жұлдыз)</li><li>Таңғы ас кіреді</li><li>Мәскеу туры</li></ul><button class="btn">Брондау</button></div>
+
+      <!-- 16 -->
+      <div class="plan"><div class="plan__header" style="background-image:url('./photo/india.jpg');"><h3>Индия</h3></div><p class="price">180 000 ₸</p><ul><li>5 күн, 4 түн</li><li>Қонақүй (3 жұлдыз)</li><li>Таңғы ас кіреді</li><li>Делі және Агра туры</li></ul><button class="btn">Брондау</button></div>
+
+      <!-- 17 -->
+      <div class="plan"><div class="plan__header" style="background-image:url('./photo/zeland.jpg');"><h3>Жаңа Зеландия</h3></div><p class="price">210 000 ₸</p><ul><li>6 күн, 5 түн</li><li>Қонақүй (3 жұлдыз)</li><li>Таңғы ас кіреді</li><li>Окленд туры</li></ul><button class="btn">Брондау</button></div>
+
+      <!-- 18 -->
+      <div class="plan"><div class="plan__header" style="background-image:url('./photo/sydney.jpg');"><h3>Австралия</h3></div><p class="price">220 000 ₸</p><ul><li>6 күн, 5 түн</li><li>Қонақүй (3 жұлдыз)</li><li>Таңғы ас кіреді</li><li>Сидней туры</li></ul><button class="btn">Брондау</button></div>
+
+      <!-- 19 -->
+      <div class="plan"><div class="plan__header" style="background-image:url('./photo/thailand.jpg');"><h3>Таиланд</h3></div><p class="price">160 000 ₸</p><ul><li>4 күн, 3 түн</li><li>Қонақүй (3 жұлдыз)</li><li>Таңғы ас кіреді</li><li>Бангкок туры</li></ul><button class="btn">Брондау</button></div>
+
+      <!-- 20 -->
+      <div class="plan"><div class="plan__header" style="background-image:url('./photo/vetnam.jpg');"><h3>Вьетнам</h3></div><p class="price">150 000 ₸</p><ul><li>4 күн, 3 түн</li><li>Қонақүй (3 жұлдыз)</li><li>Таңғы ас кіреді</li><li>Ханой туры</li></ul><button class="btn">Брондау</button></div>
+      <!-- (barcha planlar — o‘zgarmas holatda) -->
+      <!-- ... -->
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact">
+    <h2>Байланысу және брондау</h2>
+    <form>
+      <input type="text" placeholder="Атыңыз" required />
+      <input type="email" placeholder="Email" required />
+      <textarea placeholder="Хабарламаңызды жазыңыз..."></textarea>
+      <button type="submit">Жіберу</button>
+    </form>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 Pathway Туризм агенттігі. Барлық құқықтар қорғалған.</p>
+    <div class="footer__icons">
+      <i class="ri-instagram-fill"></i>
+      <i class="ri-telegram-fill"></i>
+      <i class="ri-youtube-fill"></i>
+      <i class="ri-map-pin-2-fill"></i>
+    </div>
+  </footer>
+</body>
+</html>
