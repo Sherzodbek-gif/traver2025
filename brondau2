@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Брондау | Pathway</title>
+
+  <!-- Remix icons & Google font -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===== Reset ===== */
+    *{box-sizing:border-box;margin:0;padding:0;scroll-behavior:smooth}
+    html,body{height:100%}
+    body{
+      font-family:"Poppins",sans-serif;
+      background:#f4f6f8;
+      color:#222;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    /* ===== NAVIGATION ===== */
+    nav {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 80px;
+      z-index: 100;
+      backdrop-filter: blur(8px);
+    }
+    .nav__logo { display: flex; align-items: center; gap: 20px; }
+    .company__name { font-size: 1.8rem; font-weight: 700; color: #fff; }
+    .tagline { font-style: italic; font-size: 1rem; color: #ffcc00; border-left: 2px solid #ffcc00; padding-left: 12px; }
+    .nav__links { display: flex; list-style: none; gap: 30px; }
+    .nav__links a {
+      color: #fff; text-decoration: none; font-weight: 500; transition: 0.3s;
+    }
+    .nav__links a:hover, .nav__links a.active { color: #ffcc00; }
+
+    /* ===== HERO ===== */
+    .hero {
+  position: relative;
+  height: 100vh; /* ekran to‘liq */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+  overflow: hidden;
+}
+
+/* PARALLAX FON EFFEKTI */
+.parallax {
+  background: url('./photo/imagemonitor.jpg') center/cover fixed no-repeat;
+  height: 75vh;
+  /* fixed = parallax effekti */
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5); /* qoraytirish */
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  animation: fadeInUp 1.5s ease;
+}
+
+.hero-content h1 {
+  font-size: 3.5rem;
+  margin-bottom: 15px;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.5);
+}
+
+.hero-content p {
+  font-size: 1.3rem;
+  margin-bottom: 25px;
+}
+
+.btn {
+  background: #ffcc00;
+  color: #111;
+  padding: 12px 30px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background: #e6b800;
+  transform: scale(1.05);
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+    /* ===== CONTAINER ===== */
+    .container{max-width:920px;margin:32px auto;padding:0 20px;}
+
+    /* ===== CARD (form wrapper) ===== */
+    .card{
+      background:#fff;border-radius:16px;padding:28px;box-shadow:0 12px 30px rgba(20,30,40,0.08);
+      overflow:hidden;
+    }
+
+    h2.section-title{
+      text-align:center;font-size:1.6rem;margin-bottom:18px;position:relative;
+      color:#222;font-weight:700;
+    }
+    h2.section-title::after{
+      content:"";position:absolute;width:78px;height:4px;background:#ffcc00;bottom:-12px;left:50%;transform:translateX(-50%);border-radius:2px;
+    }
+
+    /* ===== GRID FOR FIELDS ===== */
+    .grid-2{
+      display:grid;grid-template-columns:1fr 1fr;gap:16px;
+    }
+    .field{margin-top:12px}
+    label{display:block;font-size:0.9rem;font-weight:600;margin-bottom:8px;color:#333}
+    select,input,textarea{
+      width:100%;padding:12px 14px;border-radius:10px;border:1px solid #d6dbe0;background:#fff;font-size:0.95rem;
+      transition:box-shadow .18s, border-color .18s;
+    }
+    select:focus,input:focus,textarea:focus{outline:none;border-color:#ffcc00;box-shadow:0 6px 18px rgba(255,204,0,0.12)}
+
+    .dates{display:flex;gap:12px}
+    .dates input{flex:1}
+
+    /* package details & price */
+    .package-details{
+      margin-top:14px;padding:14px;background:#fbfaf8;border-radius:10px;border:1px solid #eee;max-height:220px;overflow:auto;
+    }
+    .package-details strong{display:block;margin-bottom:8px;color:#333}
+    .package-details ul{padding-left:18px;color:#444;line-height:1.6}
+
+    .total{margin-top:14px;font-weight:700;font-size:1.1rem;color:#222}
+
+    /* buttons */
+    .btn{
+      display:inline-block;background:#ffcc00;color:#111;border:none;padding:12px 18px;border-radius:10px;font-weight:700;cursor:pointer;
+      transition:transform .18s,box-shadow .18s;
+    }
+    .btn:hover{transform:translateY(-4px);box-shadow:0 10px 22px rgba(255,204,0,0.18)}
+    .btn-secondary{background:transparent;border:1px solid #d6dbe0;color:#333;padding:10px 14px}
+
+    /* step navigation */
+    .steps{display:flex;gap:12px;justify-content:center;margin-top:18px}
+    .step-pill{padding:8px 12px;border-radius:999px;background:#f1f3f5;color:#666;font-weight:700;font-size:0.9rem}
+    .step-pill.active{background:#ffefc2;color:#111;box-shadow:0 6px 18px rgba(255,204,0,0.12)}
+
+    /* Step 2 (personal) collapsed area */
+    .personal-wrap{
+      max-height:0;overflow:hidden;transition:max-height .5s ease,opacity .4s linear;padding:0 0;
+      opacity:0;margin-top:12px;
+    }
+    .personal-wrap.open{max-height:800px;opacity:1;padding-top:18px;padding-bottom:6px}
+
+    /* responsive */
+    @media (max-width:820px){
+      .grid-2{grid-template-columns:1fr}
+      nav{padding:12px 24px}
+      .hero{height:34vh}
+      .company__name{font-size:1.3rem}
+    }
+
+    footer{margin-top:28px;padding:22px 0;text-align:center;color:#777;font-size:0.9rem}
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+ <nav>
+      <div class="nav__logo">
+        <div class="company__name">Pathway</div>
+        <div class="tagline">Туризм агенттігі</div>
+      </div>
+      <ul class="nav__links">
+        <li><a href="index.html">БАСТЫ БЕТ</a></li>
+        <li><a href="bizturali.html">БІЗ ТУРАЛЫ</a></li>
+        <li><a href="bagyttar.html">БАҒЫТТАР</a></li>
+        <li><a href="pikirler.html">ПІКІРЛЕР</a></li>
+        <li><a href="brondau.html" class="active">БРОНДАУ</a></li>
+      </ul>
+    </nav>
+  <!-- HERO -->
+  <!-- ===== HERO PARALLAX ===== -->
+<section class="hero parallax">
+  <div class="hero-content">
+    <h1>Біздің үздік бағыттар 🌍</h1>
+    <p>Табиғаттың сұлулығын бізбен бірге ашыңыз</p>
+  </div>
+</section>
+
+  <!-- CONTAINER -->
+  <main class="container">
+    <div class="card">
+
+      <h2 class="section-title">Брондау формасы</h2>
+
+      <!-- step indicator -->
+      <div class="steps" aria-hidden="true" style="margin-bottom:16px">
+        <div id="pill-step-1" class="step-pill active">1 — Таңдау</div>
+        <div id="pill-step-2" class="step-pill">2 — Жеке мәліметтер</div>
+      </div>
+
+      <!-- FORM -->
+      <form id="bookingForm" autocomplete="off">
+        <!-- Step 1 -->
+        <div id="step1" class="step">
+          <div class="grid-2">
+            <div class="field">
+              <label for="country">Елді таңдаңыз</label>
+              <select id="country" required>
+                <option value="">--Таңдаңыз--</option>
+                <option value="Italy">Италия</option>
+                <option value="Kazakhstan">Қазақстан</option>
+                <option value="France">Франция</option>
+                <option value="Spain">Испания</option>
+                <option value="Germany">Германия</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="packageType">Пакет түрі</label>
+              <select id="packageType" required>
+                <option value="">--Таңдаңыз--</option>
+                <option value="Econom">Эконом</option>
+                <option value="Standard">Стандарт</option>
+                <option value="Lux">Люкс</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="field">
+              <label for="days">Күндер</label>
+              <select id="days" required>
+                <option value="">--Таңдаңыз--</option>
+                <option value="7">7 күн</option>
+                <option value="10">10 күн</option>
+                <option value="15">15 күн</option>
+                <option value="30">30 күн</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="people">Адам саны</label>
+              <input id="people" type="number" min="1" value="1" required>
+            </div>
+          </div>
+
+          <div class="dates" style="margin-top:8px">
+            <div style="flex:1">
+              <label for="startDate">Басталу күні</label>
+              <input id="startDate" type="date" readonly>
+            </div>
+            <div style="flex:1">
+              <label for="endDate">Аяқталу күні</label>
+              <input id="endDate" type="date" readonly>
+            </div>
+          </div>
+
+          <div class="package-details" id="packageDetails" aria-live="polite">
+            <strong>Пакетке кіреді:</strong>
+            <ul id="packageItems"><li>---</li></ul>
+          </div>
+
+          <div class="total">Жалпы баға: <span id="totalPrice">0</span> KZT</div>
+
+          <div style="display:flex;gap:12px;justify-content:flex-end;margin-top:16px">
+            <button type="button" id="toPersonal" class="btn">Келесі — Жеке мәліметтер</button>
+          </div>
+        </div>
+
+        <!-- Step 2 (personal) collapsible -->
+        <div class="personal-wrap" id="personalWrap">
+          <div class="step" id="step2">
+            <div style="display:flex;gap:14px;flex-direction:column">
+              <div class="grid-2">
+                <div class="field">
+                  <label for="fullName">Толық аты-жөні</label>
+                  <input id="fullName" type="text" placeholder="Атыңыз және тегіңіз" required>
+                </div>
+                <div class="field">
+                  <label for="phone">Телефон нөмірі</label>
+                  <input id="phone" type="tel" placeholder="+7 7XX XXX XXXX" required>
+                </div>
+              </div>
+
+              <div class="grid-2">
+                <div class="field">
+                  <label for="email">Email</label>
+                  <input id="email" type="email" placeholder="email@mail.com" required>
+                </div>
+                <div class="field">
+                  <label for="notes">Қосымша ескертулер (міндетті емес)</label>
+                  <input id="notes" type="text" placeholder="Мысалы: виза туралы"/>
+                </div>
+              </div>
+
+              <div style="display:flex;gap:12px;justify-content:flex-end;margin-top:8px">
+                <button type="button" id="backToChoose" class="btn-secondary btn">Артқа</button>
+                <button type="submit" id="submitBooking" class="btn">Тапсырыс беру</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    © 2025 Pathway — Барлық құқықтар қорғалған.
+  </footer>
+
+  <script>
+    // Data (from your original)
+    const packagePrices = {
+  "Italy": {
+    "Econom": {7: 2205000, 10: 3200000, 15: 4500000, 30: 8500000},
+    "Standard": {7: 4500000, 10: 6500000, 15: 9000000, 30: 17000000},
+    "Lux": {7: 9000000, 10: 13000000, 15: 18000000, 30: 34000000}
+  },
+
+  "Kazakhstan": {
+    "Econom": {7: 2000000, 10: 3000000, 15: 4000000, 30: 8000000},
+    "Standard": {7: 4000000, 10: 6000000, 15: 8000000, 30: 16000000},
+    "Lux": {7: 8000000, 10: 12000000, 15: 16000000, 30: 32000000}
+  },
+
+  "France": {
+    "Econom": {7: 2300000, 10: 3500000, 15: 4600000, 30: 9000000},
+    "Standard": {7: 4600000, 10: 7000000, 15: 9200000, 30: 18000000},
+    "Lux": {7: 9200000, 10: 14000000, 15: 18400000, 30: 36000000}
+  },
+
+  "Spain": {
+    "Econom": {7: 2200000, 10: 3300000, 15: 4400000, 30: 8800000},
+    "Standard": {7: 4400000, 10: 6600000, 15: 8800000, 30: 17600000},
+    "Lux": {7: 8800000, 10: 13200000, 15: 17600000, 30: 35200000}
+  },
+
+  "Germany": {
+    "Econom": {7: 2400000, 10: 3600000, 15: 4800000, 30: 9600000},
+    "Standard": {7: 4800000, 10: 7200000, 15: 9600000, 30: 19200000},
+    "Lux": {7: 9600000, 10: 14400000, 15: 19200000, 30: 38400000}
+  }
+};
+
+
+    const countryStartDates = {
+      "Italy": { "Econom": "2025-11-01", "Standard": "2025-11-03", "Lux": "2025-11-05" },
+      "Kazakhstan": { "Econom": "2025-10-20", "Standard": "2025-10-22", "Lux": "2025-10-25" },
+      "France": { "Econom": "2025-12-01", "Standard": "2025-12-03", "Lux": "2025-12-05" },
+      "Spain": { "Econom": "2025-11-03", "Standard": "2025-11-05", "Lux": "2025-11-08" },
+      "Germany": { "Econom": "2025-11-10", "Standard": "2025-11-12", "Lux": "2025-11-15" }
+    };
+
+    const packageContents = {
+      "Italy": {
+        "Econom": ["Қонақүй: 3 жұлдыз","Таңғы ас","Рим экскурсиясы","Автобус тасымалы","Сақтандыру: бар"],
+        "Standard": ["Қонақүй: 4 жұлдыз","Таңғы + түскі ас","Рим + Флоренция экскурсиясы","Автобус + пойыз","Сақтандыру: бар","Су спорт түрлері","Гид"],
+        "Lux": ["Қонақүй: 5 жұлдыз","Барлық тамақ","Италия толық тур","VIP тасымалдау","Спа және массаж","Гид 24/7","Шопинг тур","Фото/видео қызметі"]
+      },
+      "Kazakhstan": {
+        "Econom": ["Қонақүй: 3 жұлдыз","Таңғы ас","Шымкент экскурсиясы","Автобус тасымалы","Сақтандыру: бар"],
+        "Standard": ["Қонақүй: 4 жұлдыз","Таңғы + түскі ас","Алматы + Астана экскурсиясы","Автобус + пойыз","Сақтандыру: бар","Гид қызметі"],
+        "Lux": ["Қонақүй: 5 жұлдыз","Барлық тамақ","Қазақстан бойынша толық тур","VIP тасымалдау","Спа және массаж","Гид қызметі 24/7","Шопинг тур","Фото/видео қызметі"]
+      }
+    };
+
+    // DOM
+    const countryEl = document.getElementById('country');
+    const packageTypeEl = document.getElementById('packageType');
+    const daysEl = document.getElementById('days');
+    const peopleEl = document.getElementById('people');
+    const startDateEl = document.getElementById('startDate');
+    const endDateEl = document.getElementById('endDate');
+    const packageItemsUl = document.getElementById('packageItems');
+    const totalPriceEl = document.getElementById('totalPrice');
+
+    const toPersonalBtn = document.getElementById('toPersonal');
+    const personalWrap = document.getElementById('personalWrap');
+    const pillStep1 = document.getElementById('pill-step-1');
+    const pillStep2 = document.getElementById('pill-step-2');
+    const backToChooseBtn = document.getElementById('backToChoose');
+    const bookingForm = document.getElementById('bookingForm');
+
+    // Update package details list
+    function updatePackageDetails(){
+      packageItemsUl.innerHTML = '';
+      const country = countryEl.value;
+      const pkg = packageTypeEl.value;
+      if(country && pkg && packageContents[country] && packageContents[country][pkg]){
+        packageContents[country][pkg].forEach(item=>{
+          const li = document.createElement('li');
+          li.textContent = item;
+          packageItemsUl.appendChild(li);
+        });
+      } else {
+        packageItemsUl.innerHTML = '<li>Пакет туралы ақпаратты көргіңіз келсе — ел мен пакет түрін таңдаңыз.</li>';
+      }
+    }
+
+    // Update dates based on country start dates and days
+    function updateDates(){
+      const country = countryEl.value;
+      const pkg = packageTypeEl.value;
+      const days = parseInt(daysEl.value);
+      if(country && pkg && days && countryStartDates[country] && countryStartDates[country][pkg]){
+        const start = new Date(countryStartDates[country][pkg]);
+        startDateEl.value = start.toISOString().split('T')[0];
+        const end = new Date(start);
+        end.setDate(start.getDate() + days);
+        endDateEl.value = end.toISOString().split('T')[0];
+      } else {
+        startDateEl.value = '';
+        endDateEl.value = '';
+      }
+    }
+
+    // Calculate total price (in KZT like original)
+    function calculateTotal(){
+      const country = countryEl.value;
+      const pkg = packageTypeEl.value;
+      const days = parseInt(daysEl.value);
+      const people = parseInt(peopleEl.value) || 0;
+      if(country && pkg && days && people && packagePrices[country] && packagePrices[country][pkg]){
+        const pricePerPerson = packagePrices[country][pkg][days];
+        if(typeof pricePerPerson === 'number'){
+          const total = pricePerPerson * people;
+          // display using kazakh/ru-locale format
+          totalPriceEl.textContent = total.toLocaleString('kk-KZ');
+          return;
+        }
+      }
+      totalPriceEl.textContent = '0';
+    }
+
+    // Update everything helper
+    function updateAll(){ updatePackageDetails(); updateDates(); calculateTotal(); }
+
+    // listeners
+    [countryEl, packageTypeEl, daysEl].forEach(el => el.addEventListener('change', updateAll));
+    peopleEl.addEventListener('input', calculateTotal);
+
+    // go to personal step
+    toPersonalBtn.addEventListener('click', () => {
+      // Validate step1 required fields
+      if(!countryEl.value || !packageTypeEl.value || !daysEl.value || !peopleEl.value){
+        alert('Барлық өрістерді (ел, пакет, күндер, адам саны) толтыру қажет.');
+        return;
+      }
+      // open personal area (smooth)
+      personalWrap.classList.add('open');
+      pillStep1.classList.remove('active');
+      pillStep2.classList.add('active');
+      // scroll to personal area smoothly
+      setTimeout(()=> {
+        const rect = personalWrap.getBoundingClientRect();
+        window.scrollBy({top: rect.top - 24, behavior:'smooth'});
+      }, 120);
+    });
+
+    backToChooseBtn.addEventListener('click', () => {
+      personalWrap.classList.remove('open');
+      pillStep2.classList.remove('active');
+      pillStep1.classList.add('active');
+      window.scrollTo({top: document.querySelector('.card').offsetTop - 18, behavior:'smooth'});
+    });
+
+    // On submit
+    bookingForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      // Basic validation for personal fields
+      const name = document.getElementById('fullName').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const email = document.getElementById('email').value.trim();
+      if(!name || !phone || !email){
+        alert('Барлық жеке мәліметтерді толтырыңыз (аты, телефон, email).');
+        return;
+      }
+
+      // Gather summary (you can send it to server here)
+      const summary = {
+        package: packageTypeEl.value + ' — ' + (countryEl.value || ''),
+        days: daysEl.value,
+        people: peopleEl.value,
+        startDate: startDateEl.value,
+        endDate: endDateEl.value,
+        total: totalPriceEl.textContent + ' KZT',
+        client: { name, phone, email, notes: document.getElementById('notes').value || '' }
+      };
+
+      // For demo: show confirmation
+      const niceMsg = `Рахмет, ${name}!\n\nСіздің брондауыңыз қабылданды.\n\nНегізгі мәліметтер:\n${summary.package}, ${summary.days} күн, ${summary.people} адам\nБасталу: ${summary.startDate}\nЖалпы баға: ${summary.total}\n\nБіз сізбен жақын арада байланысамыз.`;
+      alert(niceMsg);
+
+      // Reset form to initial
+      bookingForm.reset();
+      updateAll();
+      personalWrap.classList.remove('open');
+      pillStep2.classList.remove('active');
+      pillStep1.classList.add('active');
+      window.scrollTo({top: document.querySelector('.card').offsetTop - 18, behavior:'smooth'});
+    });
+
+    // init
+    updatePackageDetails();
+    calculateTotal();
+  </script>
+</body>
+</html>
