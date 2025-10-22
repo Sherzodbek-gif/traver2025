@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Бағыттар | Pathway Туризм агенттігі</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+    body {
+      font-family: "Poppins", sans-serif;
+      background: #fafafa;
+      color: #222;
+      overflow-x: hidden;
+    }
+
+    /* ===== NAVIGATION ===== */
+    nav {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 80px;
+      z-index: 100;
+      backdrop-filter: blur(8px);
+    }
+    .nav__logo { display: flex; align-items: center; gap: 20px; }
+    .company__name { font-size: 1.8rem; font-weight: 700; color: #fff; }
+    .tagline { font-style: italic; font-size: 1rem; color: #ffcc00; border-left: 2px solid #ffcc00; padding-left: 12px; }
+    .nav__links { display: flex; list-style: none; gap: 30px; }
+    .nav__links a {
+      color: #fff; text-decoration: none; font-weight: 500; transition: 0.3s;
+    }
+    .nav__links a:hover, .nav__links a.active { color: #ffcc00; }
+
+    /* ===== HERO ===== */
+    .hero {
+  position: relative;
+  height: 100vh; /* ekran to‘liq */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+  overflow: hidden;
+}
+
+/* PARALLAX FON EFFEKTI */
+.parallax {
+  background: url('./photo/imagemonitor.jpg') center/cover fixed no-repeat;
+  height: 75vh;
+  /* fixed = parallax effekti */
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5); /* qoraytirish */
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  animation: fadeInUp 1.5s ease;
+}
+
+.hero-content h1 {
+  font-size: 3.5rem;
+  margin-bottom: 15px;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.5);
+}
+
+.hero-content p {
+  font-size: 1.3rem;
+  margin-bottom: 25px;
+}
+
+.btn {
+  background: #ffcc00;
+  color: #111;
+  padding: 12px 30px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background: #e6b800;
+  transform: scale(1.05);
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+    /* ===== SEARCH + FILTER ===== */
+    .filter-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin: 80px auto 60px;
+      padding: 0 30px;
+    }
+
+    #search {
+      flex: 1;
+      min-width: 250px;
+      max-width: 400px;
+      padding: 14px 18px;
+      border-radius: 30px;
+      border: 2px solid #ffcc00;
+      font-size: 1rem;
+      outline: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    #search::placeholder { color: #777; }
+    #search:focus {
+      border-color: #222;
+      box-shadow: 0 8px 25px rgba(255,204,0,0.3);
+    }
+
+    .filter-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .filter-buttons button {
+      background: #fff;
+      border: 2px solid #ffcc00;
+      color: #222;
+      padding: 10px 22px;
+      border-radius: 25px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .filter-buttons button.active {
+      background: #ffcc00;
+      color: #222;
+      transform: scale(1.05);
+    }
+    .filter-buttons button:hover {
+      background: #ffdb4d;
+    }
+
+    /* ===== DESTINATIONS ===== */
+    .destination__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 35px;
+      padding: 0 60px 120px;
+    }
+
+    .destination__card {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      transition: 0.4s ease;
+    }
+    .destination__card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    }
+    .destination__card img {
+      width: 100%;
+      height: 450px;
+      object-fit: cover;
+      border-bottom: 3px solid #ffcc00;
+    }
+    .destination__info {
+      padding: 20px 25px;
+      text-align: center;
+    }
+    .destination__info h3 {
+      color: #222;
+      font-size: 1.4rem;
+      margin-bottom: 8px;
+    }
+    .destination__info p {
+      color: #666;
+      margin-bottom: 15px;
+      line-height: 1.4;
+      font-size: 0.95rem;
+    }
+    .btn {
+      background: #ffcc00;
+      border: none;
+      padding: 10px 25px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+    .btn:hover {
+      background: #222;
+      color: #fff;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: #111;
+      color: #ccc;
+      padding: 40px 20px;
+      text-align: center;
+    }
+    .footer__icons {
+      margin-top: 15px;
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+    }
+    .footer__icons i {
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: #ffcc00;
+      transition: 0.3s;
+    }
+    .footer__icons i:hover { color: #fff; transform: scale(1.2); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      nav { flex-direction: column; padding: 15px 25px; gap: 10px; }
+      .hero h1 { font-size: 2rem; text-align: center; padding: 0 20px; }
+      .filter-container { flex-direction: column; }
+      #search { width: 80%; }
+      .destination__grid { padding: 0 30px 80px; gap: 25px; }
+    }
+
+    
+      /* ===== CHAT BUTTON ===== */
+      .chat-btn {
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
+        background: #ffcc00;
+        color: #111;
+        padding: 14px 16px;
+        border-radius: 50%;
+        font-size: 1.8rem;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        cursor: pointer;
+        transition: 0.3s;
+        z-index: 200;
+      }
+
+      .chat-btn:hover {
+        transform: scale(1.1);
+        background: #e6b800;
+      }
+  </style>
+</head>
+
+<body>
+  <!-- ===== NAVIGATION ===== -->
+  <nav>
+    <div class="nav__logo">
+      <div class="company__name">Pathway</div>
+      <div class="tagline">Туризм агенттігі</div>
+    </div>
+    <ul class="nav__links">
+      <li><a href="index.html">БАСТЫ БЕТ</a></li>
+      <li><a href="bizturali.html">БІЗ ТУРАЛЫ</a></li>
+      <li><a href="bagyttar.html" class="active">БАҒЫТТАР</a></li>
+      <li><a href="pikirler.html">ПІКІРЛЕР</a></li>
+      <li><a href="brondau.html">БРОНДАУ</a></li>
+    </ul>
+  </nav>
+
+  <!-- ===== HERO PARALLAX ===== -->
+<section class="hero parallax">
+  <div class="hero-content">
+    <h1>Біздің үздік бағыттар 🌍</h1>
+    <p>Табиғаттың сұлулығын бізбен бірге ашыңыз</p>
+  </div>
+</section>
+
+  <!-- ===== SEARCH + FILTER ===== -->
+  <div class="filter-container">
+    <input type="text" id="search" placeholder="🔍 Бағытты іздеу..." />
+    <div class="filter-buttons">
+      <button class="active" data-filter="all">Барлығы</button>
+      <button data-filter="europe">Еуропа</button>
+      <button data-filter="asia">Азия</button>
+      <button data-filter="africa">Африка</button>
+      <button data-filter="north-america">Солтүстік Америка</button>
+      <button data-filter="south-america">Оңтүстік Америка</button>
+    </div>
+  </div>
+
+  <!-- ===== DESTINATIONS ===== -->
+  <section class="destination__grid">
+      <!-- Еуропа -->
+      <div class="destination__card" data-category="europe">
+        <img src="./salom/italy_photo.jpg" alt="Италия" />
+        <div class="destination__info">
+          <h3>Италия</h3>
+          <p>Тарих, сән және гастрономия елі.</p>
+          <a href="italy.html" class="btn">Көру</a>
+        </div>
+      </div>
+
+      <div class="destination__card" data-category="europe">
+        <img src="./photo/munich.jpg" alt="Германия" />
+        <div class="destination__info">
+          <h3>Германия</h3>
+          <p>Берлиннен Альпіге дейінгі тамаша сапар.</p>
+          <a href="germany.html" class="btn">Көру</a>
+        </div>
+      </div>
+
+      <div class="destination__card" data-category="europe">
+        <img src="./photo/switsaland2.jpg" alt="Швейцария" />
+        <div class="destination__info">
+          <h3>Швейцария</h3>
+          <p>Таулар мен көлдер елі.</p>
+          <button class="btn">Көру</button>
+        </div>
+      </div>
+
+      <div class="destination__card" data-category="europe">
+        <img src="./photo/istanbul.jpg" alt="Түркия" />
+        <div class="destination__info">
+          <h3>Түркия</h3>
+          <p>Тарих пен мәдениет тоғысқан ел.</p>
+          <a href="turkey.html" class="btn">Көру</a>
+        </div>
+      </div>
+
+      <!-- Испания -->
+<div class="destination__card" data-category="europe">
+  <img src="./photo/spain.jpg" alt="Испания" />
+  <div class="destination__info">
+    <h3>Испания</h3>
+    <p>Quyosh, plyaj va flamenco raqsi mamlakati.</p>
+    <a href="spain.html" class="btn">Көру</a>
+  </div>
+</div>
+
+<!-- Франция -->
+<div class="destination__card" data-category="europe">
+  <img src="./photo/paris.jpg" alt="Франция" />
+  <div class="destination__info">
+    <h3>Франция</h3>
+    <p>Romantika va san’at maskani.</p>
+    <a href="france.html" class="btn">Көру</a>
+  </div>
+</div>
+
+<!-- Нидерландия -->
+<div class="destination__card" data-category="europe">
+  <img src="./photo/niderland.jpg" alt="Нидерландия" />
+  <div class="destination__info">
+    <h3>Нидерландия</h3>
+    <p>Gullar, shamol tegirmonlari va kanallar diyorі.</p>
+    <a href="netherlands.html" class="btn">Көру</a>
+  </div>
+</div>
+
+<!-- Чехия -->
+<div class="destination__card" data-category="europe">
+  <img src="./photo/prague.jpg" alt="Чехия" />
+  <div class="destination__info">
+    <h3>Чехия</h3>
+    <p>Qadimiy Praga shahri bilan mashhur.</p>
+    <a href="czech.html" class="btn">Көру</a>
+  </div>
+</div>
+
+<!-- Норвегия -->
+<div class="destination__card" data-category="europe">
+  <img src="./photo/denmark.jpg" alt="Норвегия" />
+  <div class="destination__info">
+    <h3>Норвегия</h3>
+    <p>Fjordlar va shimoliy nurlar yurti.</p>
+    <a href="norway.html" class="btn">Көру</a>
+  </div>
+</div>
+
+<!-- Швеция -->
+<div class="destination__card" data-category="europe">
+  <img src="./photo/swiden.jpg" alt="Швеция" />
+  <div class="destination__info">
+    <h3>Швеция</h3>
+    <p>Zamonaviy dizayn va toza tabiat mamlakati.</p>
+    <a href="sweden.html" class="btn">Көру</a>
+  </div>
+</div>
+
+<!-- Финляндия -->
+<div class="destination__card" data-category="europe">
+  <img src="./photo/finland.jpg" alt="Финляндия" />
+  <div class="destination__info">
+    <h3>Финляндия</h3>
+    <p>Muzli ko‘llar va sauna an’analari.</p>
+    <a href="finland.html" class="btn">Көру</a>
+  </div>
+</div>
+
+<!-- Дания -->
+<div class="destination__card" data-category="europe">
+  <img src="./photo/norvey.jpg" alt="Дания" />
+  <div class="destination__info">
+    <h3>Дания</h3>
+    <p>Erkinlik, dizayn va baxtli xalq yurti.</p>
+    <a href="denmark.html" class="btn">Көру</a>
+  </div>
+</div>
+
+<!-- Бельгия -->
+<div class="destination__card" data-category="europe">
+  <img src="./photo/belgium.jpg" alt="Бельгия" />
+  <div class="destination__info">
+    <h3>Бельгия</h3>
+    <p>Shokolad, pivo va go‘zal arxitektura.</p>
+    <a href="belgium.html" class="btn">Көру</a>
+  </div>
+</div>
+
+<!-- Португалия -->
+<div class="destination__card" data-category="europe">
+  <img src="./photo/portugal.jpg" alt="Португалия" />
+  <div class="destination__info">
+    <h3>Португалия</h3>
+    <p>Atlantika sohilidagi quyoshli diyor.</p>
+    <a href="portugal.html" class="btn">Көру</a>
+  </div>
+</div>
+
+<!-- Греция -->
+<div class="destination__card" data-category="europe">
+  <img src="./photo/greece.jpg" alt="Греция" />
+  <div class="destination__info">
+    <h3>Греция</h3>
+    <p>Qadimgi tarix va orollar go‘zalligi.</p>
+    <a href="greece.html" class="btn">Көру</a>
+  </div>
+</div>
+      <!-- Азия -->
+      <div class="destination__card" data-category="asia">
+        <img src="./photo/china_photo.jpg" alt="Қытай" />
+        <div class="destination__info">
+          <h3>Қытай</h3>
+          <p>Ежелгі өркениет пен заманауилық елі.</p>
+          <button class="btn">Көру</button>
+        </div>
+      </div>
+
+      <!-- Тайланд -->
+<div class="destination__card" data-category="asia">
+  <img src="./photo/thailand.jpg" alt="Тайланд" />
+  <div class="destination__info">
+    <h3>Тайланд</h3>
+    <p>Күн, теңіз және күлімдеген адамдар елі.</p>
+    <button class="btn">Көру</button>
+  </div>
+</div>
+
+<!-- Малайзия -->
+<div class="destination__card" data-category="asia">
+  <img src="./photo/malaysia.jpg" alt="Малайзия" />
+  <div class="destination__info">
+    <h3>Малайзия</h3>
+    <p>Табиғат пен технология үйлескен мемлекет.</p>
+    <button class="btn">Көру</button>
+  </div>
+</div>
+
+<!-- Сингапур -->
+<div class="destination__card" data-category="asia">
+  <img src="./photo/singapore.jpg" alt="Сингапур" />
+  <div class="destination__info">
+    <h3>Сингапур</h3>
+    <p>Болашақ қаласы және тазалықтың символы.</p>
+    <button class="btn">Көру</button>
+  </div>
+</div>
+
+<!-- Индонезия -->
+<div class="destination__card" data-category="asia">
+  <img src="./photo/indonesia.jpg" alt="Индонезия" />
+  <div class="destination__info">
+    <h3>Индонезия</h3>
+    <p>Мың аралдың экзотикалық елі.</p>
+    <button class="btn">Көру</button>
+  </div>
+</div>
+
+<!-- Вьетнам -->
+<div class="destination__card" data-category="asia">
+  <img src="./photo/vetnam.jpg" alt="Вьетнам" />
+  <div class="destination__info">
+    <h3>Вьетнам</h3>
+    <p>Теңіз жағалауы мен табиғи сұлулығымен әйгілі.</p>
+    <button class="btn">Көру</button>
+  </div>
+</div>
+
+<!-- Филиппин -->
+<div class="destination__card" data-category="asia">
+  <img src="./photo/philipines.jpg" alt="Филиппин" />
+  <div class="destination__info">
+    <h3>Филиппин</h3>
+    <p>Жұмақтай аралдар мен жылы жүзді халық.</p>
+    <button class="btn">Көру</button>
+  </div>
+</div>
+
+<!-- Непал -->
+<div class="destination__card" data-category="asia">
+  <img src="./photo/nepal.jpg" alt="Непал" />
+  <div class="destination__info">
+    <h3>Непал</h3>
+    <p>Гималай шыңдарының қасиетті елі.</p>
+    <button class="btn">Көру</button>
+  </div>
+</div>
+
+
+      <div class="destination__card" data-category="asia">
+        <img src="./photo/india.jpg" alt="Үндістан" />
+        <div class="destination__info">
+          <h3>Үндістан</h3>
+          <p>Түрлі түстер мен рухани мәдениет елі.</p>
+          <button class="btn">Көру</button>
+        </div>
+      </div>
+
+      <div class="destination__card" data-category="asia">
+        <img src="./photo/korea.jpg" alt="Корея" />
+        <div class="destination__info">
+          <h3>Корея</h3>
+          <p>Мәдениет пен инновация орталығы.</p>
+          <button class="btn">Көру</button>
+        </div>
+      </div>
+
+      <div class="destination__card" data-category="asia">
+        <img src="./photo/baa.jpg" alt="БАӘ" />
+        <div class="destination__info">
+          <h3>БАӘ</h3>
+          <p>Заманауи ғимараттар мен алтын жағажайлар.</p>
+          <button class="btn">Көру</button>
+        </div>
+      </div>
+
+      <!-- Африка -->
+      <div class="destination__card" data-category="africa">
+        <img src="./photo/tanzania.jpg" alt="Танзания" />
+        <div class="destination__info">
+          <h3>Танзания</h3>
+          <p>Серенгети мен Килиманджаро елі.</p>
+          <button class="btn">Көру</button>
+        </div>
+      </div>
+
+      <!-- Египет -->
+<div class="destination__card" data-category="africa">
+  <img src="./photo/egupt.jpg" alt="Египет" />
+  <div class="destination__info">
+    <h3>Египет</h3>
+    <p>Пирамидалар мен Ніл өзенінің отаны.</p>
+    <button class="btn">Көру</button>
+  </div>
+</div>
+
+<!-- Марокко -->
+<div class="destination__card" data-category="africa">
+  <img src="./photo/morocco.jpg" alt="Марокко" />
+  <div class="destination__info">
+    <h3>Марокко</h3>
+    <p>Шөл мен көне қалалардың елі.</p>
+    <button class="btn">Көру</button>
+  </div>
+</div>
+
+<!-- Оңтүстік Африка -->
+<div class="destination__card" data-category="africa">
+  <img src="./photo/cape tawn.jpg" alt="Оңтүстік Африка" />
+  <div class="destination__info">
+    <h3>Оңтүстік Африка</h3>
+    <p>Сафари мен жағалаулар жұмағы.</p>
+    <button class="btn">Көру</button>
+  </div>
+</div>
+
+<!-- Кения -->
+<div class="destination__card" data-category="africa">
+  <img src="./photo/kenia.jpg" alt="Кения" />
+  <div class="destination__info">
+    <h3>Кения</h3>
+    <p>Жабайы табиғат пен ұлттық парктер мекені.</p>
+    <button class="btn">Көру</button>
+  </div>
+</div>
+
+<!-- Эфиопия -->
+<div class="destination__card" data-category="africa">
+  <img src="./photo/efiopia.jpg" alt="Эфиопия" />
+  <div class="destination__info">
+    <h3>Эфиопия</h3>
+    <p>Тарихи мұралар мен ерекше мәдениет елі.</p>
+    <button class="btn">Көру</button>
+  </div>
+</div>
+
+<!-- Нигерия -->
+<div class="destination__card" data-category="africa">
+  <img src="./photo/nigeria.jpg" alt="Нигерия" />
+  <div class="destination__info">
+    <h3>Нигерия</h3>
+    <p>Африканың ең ірі және көпұлтты елі.</p>
+    <button class="btn">Көру</button>
+  </div>
+</div>
+
+      <div class="destination__card" data-category="africa">
+        <img src="./photo/madagaskar.jpg" alt="Мадагаскар" />
+        <div class="destination__info">
+          <h3>Мадагаскар</h3>
+          <p>Бірегей табиғат пен лемурлар мекені.</p>
+          <button class="btn">Көру</button>
+        </div>
+      </div>
+
+      <!-- Америка -->
+      <!-- АҚШ -->
+<div class="destination__card" data-category="north-america">
+  <img src="./photo/usa.jpg" alt="АҚШ" />
+  <div class="destination__info">
+    <h3>АҚШ</h3>
+    <p>Бостандық пен мүмкіндіктер елі.</p>
+    <button class="btn">Көру</button>
+  </div>
+</div>
+
+<!-- Канада -->
+<div class="destination__card" data-category="north-america">
+  <img src="./photo/toronto.jpg" alt="Канада" />
+  <div class="destination__info">
+    <h3>Канада</h3>
+    <p>Табиғаттың сұлулығы мен тыныштықтың мекені.</p>
+    <button class="btn">Көру</button>
+  </div>
+</div>
+
+<!-- Мексика -->
+<div class="destination__card" data-category="north-america">
+  <img src="./photo/mexico.jpg" alt="Мексика" />
+  <div class="destination__info">
+    <h3>Мексика</h3>
+    <p>Бай тарих, музыка және дәмді тағамдар елі.</p>
+    <button class="btn">Көру</button>
+  </div>
+</div>
+
+<!-- Бразилия -->
+<div class="destination__card" data-category="south-america">
+  <img src="./photo/brazilia.jpg" alt="Бразилия" />
+  <div class="destination__info">
+    <h3>Бразилия</h3>
+    <p>Самба, футбол және Амазон орманы елі.</p>
+    <button class="btn">Көру</button>
+  </div>
+</div>
+
+<!-- Аргентина -->
+<div class="destination__card" data-category="south-america">
+  <img src="./photo/argentina2.jpg" alt="Аргентина" />
+  <div class="destination__info">
+    <h3>Аргентина</h3>
+    <p>Танго биі мен Патагония табиғатының отаны.</p>
+    <button class="btn">Көру</button>
+  </div>
+</div>
+
+<!-- Чили -->
+<div class="destination__card" data-category="south-america">
+  <img src="./photo/chile.jpg" alt="Чили" />
+  <div class="destination__info">
+    <h3>Чили</h3>
+    <p>Анд таулары мен мұхит арасындағы ұзын мемлекет.</p>
+    <button class="btn">Көру</button>
+  </div>
+</div>
+
+<!-- Перу -->
+<div class="destination__card" data-category="south-america">
+  <img src="./photo/peru.jpg" alt="Перу" />
+  <div class="destination__info">
+    <h3>Перу</h3>
+    <p>Мачу-Пикчу мен Инка өркениетінің мұрасы.</p>
+    <button class="btn">Көру</button>
+  </div>
+</div>
+    </section>
+<!-- ===== CHAT BUTTON ===== -->
+    <div class="chat-btn">
+      <i class="ri-whatsapp-line"></i>
+    </div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <p>© 2025 Pathway Туризм агенттігі. Барлық құқықтар қорғалған.</p>
+    <div class="footer__icons">
+      <i class="ri-instagram-fill"></i>
+      <i class="ri-telegram-fill"></i>
+      <i class="ri-youtube-fill"></i>
+      <i class="ri-map-pin-2-fill"></i>
+    </div>
+  </footer>
+
+  <!-- ===== SCRIPT ===== -->
+  <script>
+    const filterButtons = document.querySelectorAll(".filter-buttons button");
+    const cards = document.querySelectorAll(".destination__card");
+    const searchInput = document.getElementById("search");
+
+    filterButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        filterButtons.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        const category = btn.getAttribute("data-filter");
+        cards.forEach(card => {
+          const matches = category === "all" || card.dataset.category === category;
+          card.style.display = matches ? "block" : "none";
+        });
+      });
+    });
+
+    searchInput.addEventListener("keyup", () => {
+      const term = searchInput.value.toLowerCase();
+      cards.forEach(card => {
+        const title = card.querySelector("h3").textContent.toLowerCase();
+        card.style.display = title.includes(term) ? "block" : "none";
+      });
+    });
+  </script>
+</body>
+</html>
