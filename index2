@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pathway Туризм агенттігі</title>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet" />
+  <style>
+    * {margin:0; padding:0; box-sizing:border-box;}
+    body {
+      font-family: "Poppins", sans-serif;
+      background: #fff;
+      color: #222;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* ===== CHEKADAGI SURATLAR ===== */
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0;
+      width: 180px;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      z-index: -1;
+      opacity: 0.6;
+    }
+    body::before {
+      left: 0;
+      background-image: url("./photo/imagemonitor3.jpg");
+    }
+    body::after {
+      right: 0;
+      background-image: url("./photo/imagemonitor3.jpg");
+    }
+
+    /* ===== NAVIGATION ===== */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 80px;
+      z-index: 100;
+      backdrop-filter: blur(8px);
+    }
+    .nav__logo {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+    .company__name {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .tagline {
+      font-style: italic;
+      font-size: 1rem;
+      color: #ffcc00;
+      border-left: 2px solid #ffcc00;
+      padding-left: 12px;
+      letter-spacing: 1px;
+    }
+    .nav__links {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+    }
+    .nav__links a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+    .nav__links a:hover { color: #ffcc00; }
+    nav a.active { color: #ffcc00; }
+
+    .menu-btn {
+      display: none;
+      font-size: 1.8rem;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    /* ===== HERO ===== */
+    .hero-image {
+      position: relative;
+      height: 75vh;
+      background-image: url("./photo/imagemonitor4.jpg");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: #fff;
+    }
+    .hero-image .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.45);
+    }
+    .header__content {
+      position: relative;
+      z-index: 1;
+      animation: fadeIn 2s ease-in-out;
+    }
+    .header__content h1 { font-size: 2.8rem; margin-bottom: 15px; }
+    .header__content p { font-size: 1.2rem; opacity: 0.9; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== MAIN CONTAINER ===== */
+    .container {
+      max-width: 1100px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 50px 60px;
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.1);
+      border-radius: 20px;
+    }
+
+    h1, h2, h3 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    p { color: #555; line-height: 1.6; }
+    section { margin-bottom: 60px; }
+
+    /* ===== TOURS ===== */
+    .tours-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 25px;
+    }
+    .tour-card {
+      background: #fafafa;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      overflow: hidden;
+      transition: .3s;
+    }
+    .tour-card:hover { transform: translateY(-6px); }
+    .tour-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .tour-body { padding: 18px; }
+    .tour-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+    }
+    .btn {
+      background: #ffcc00;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: .3s;
+    }
+    .btn:hover { background: #e6b800; }
+    .badge {
+      padding: 5px 8px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+    .badge.popular { background: #ffe8b3; color: #b36b00; }
+    .badge.hot { background: #ffd9d9; color: #b30000; }
+
+    /* ===== OFFERS ===== */
+    .offers__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+    }
+    .offer__card {
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+      overflow: hidden;
+      transition: .3s;
+    }
+    .offer__card:hover { transform: translateY(-6px); }
+    .offer__card img { width: 100%; height: 200px; object-fit: cover; }
+    .offer__card h3 { margin: 12px; }
+    .offer__card p { margin: 0 12px 12px; color: #555; }
+
+    /* ===== FAQ ===== */
+    details {
+      background: #f9f9f9;
+      margin-bottom: 15px;
+      padding: 14px 18px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      cursor: pointer;
+    }
+    summary { font-weight: 600; }
+    details p { margin-top: 10px; }
+
+    /* ===== MAP ===== */
+    .map-container {
+      width: 100%;
+      height: 400px;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    /* ===== CONTACT ===== */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    input, textarea {
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+    textarea { resize: none; min-height: 100px; }
+
+    .contact-info {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 1.05rem;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 992px) {
+      body::before, body::after { width: 100px; opacity: 0.4; }
+      .container { padding: 30px; }
+    }
+    @media (max-width: 768px) {
+      body::before, body::after { display: none; }
+      .container { box-shadow: none; border-radius: 0; }
+      .menu-btn { display: block; }
+      .nav__links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        right: 30px;
+        background: #fff;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      }
+      .nav__links.show { display: flex; }
+      .nav__links a { color: #333; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav>
+    <div class="nav__logo">
+      <div class="company__name">Pathway</div>
+      <div class="tagline">Туризм агенттігі</div>
+    </div>
+
+    <i id="menu-btn" class="ri-menu-line menu-btn"></i>
+
+    <ul id="nav-links" class="nav__links">
+      <li><a href="index.html" class="active">БАСТЫ БЕТ</a></li>
+      <li><a href="bizturali.html">БІЗ ТУРАЛЫ</a></li>
+      <li><a href="bagyttar.html">БАҒЫТТАР</a></li>
+      <li><a href="pikirler.html">ПІКІРЛЕР</a></li>
+      <li><a href="brondau.html">БРОНДАУ</a></li>
+    </ul>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <header id="home" class="hero-image">
+    <div class="overlay"></div>
+    <div class="header__content">
+      <h1>Армандаған саяхатыңызды Pathway-пен бастаңыз 🌍</h1>
+      <p>Сапар – тек жол емес, ол өмірдің жаңа беті!</p>
+    </div>
+  </header>
+
+  <!-- ===== KONTENT KONTEYNER ===== -->
+  <div class="container">
+
+    <section id="tours">
+      <h1>Ең танымал турлар</h1>
+      <p>Түрлі бағыттар — демалыстан романтикаға дейін. Таңдаңыз және брондаңыз!</p>
+      <div class="tours-grid">
+        <div class="tour-card">
+          <img src="./photo/kazakhstan.jpg" alt="Kazakhstan">
+          <div class="tour-body">
+            <h3>Қазақстан — Табиғат пен тарих</h3>
+            <p>7 күн · Бастап: 249 000 ₸</p>
+            <p>Алматы, Шарын каньоны, Көлсай және Каинды көлдері.</p>
+            <div class="tour-actions">
+              <button class="btn">Толығырақ</button>
+              <span class="badge popular">Танымал</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tour-card">
+          <img src="./photo/istanbul.jpg" alt="Turkey">
+          <div class="tour-body">
+            <h3>Түркия — Саяхат + Демалыс</h3>
+            <p>8 күн · Бастап: 299 000 ₸</p>
+            <p>Анталия, жағажай, отель 5★, экскурсиялар және трансфер.</p>
+            <div class="tour-actions">
+              <button class="btn">Толығырақ</button>
+              <span class="badge hot">Жаңа</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="offers" class="offers">
+      <h2>Арнайы ұсыныстар мен жеңілдіктер</h2>
+      <div class="offers__grid">
+        <div class="offer__card">
+          <img src="./photo/istanbul.jpg" alt="Түркия туры" />
+          <h3>Түркияға демалыс -20%</h3>
+          <p>Барлық қамтылған 7 күндік тур, баға 299 000 ₸ бастап!</p>
+          <button class="btn">Толығырақ</button>
+        </div>
+        <div class="offer__card">
+          <img src="./photo/baa.jpg" alt="Дубай туры" />
+          <h3>Дубайға арнайы ұсыныс</h3>
+          <p>Қысқы маусымға арналған супер жеңілдік!</p>
+          <button class="btn">Толығырақ</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="faq">
+      <h2>Жиі қойылатын сұрақтар</h2>
+      <details>
+        <summary><i class="ri-question-line"></i> Виза алу қанша уақыт алады?</summary>
+        <p>Орта есеппен 5–10 жұмыс күні ішінде дайын болады.</p>
+      </details>
+      <details>
+        <summary><i class="ri-earth-line"></i> Қай елдерге турлар бар?</summary>
+        <p>Біз Түркия, БАӘ, Мальдив, Египет және Еуропа бағыттарын ұсынамыз.</p>
+      </details>
+    </section>
+
+    <section class="map-section">
+      <h2>Біздің офисіміз</h2>
+      <div class="map-container">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1994.650016194437!2d71.42317067723125!3d51.128206071731975"
+          allowfullscreen="" loading="lazy"></iframe>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <h2>Байланысу</h2>
+      <form>
+        <input type="text" placeholder="Атыңыз" required />
+        <input type="email" placeholder="Электронды поштаңыз" required />
+        <textarea placeholder="Хабарламаңыз"></textarea>
+        <button class="btn">Жіберу</button>
+      </form>
+    
+      <div class="contact-info">
+        <p><strong>Жұмыс уақыты:</strong> Дс–Жм: 09:00–18:00 | Сб: 10:00–16:00</p>
+        <p><strong>Мекенжай:</strong> Кентау қ., Қонаев көшесі 12</p>
+        <p><strong>Телефон:</strong> +7 (700) 123-45-67</p>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const menuBtn = document.getElementById('menu-btn');
+    const navLinks = document.getElementById('nav-links');
+    if (menuBtn && navLinks) {
+      menuBtn.addEventListener('click', () => {
+        navLinks.classList.toggle('show');
+      });
+    }
+  </script>
+</body>
+</html>
